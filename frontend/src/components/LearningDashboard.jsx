@@ -22,12 +22,17 @@ const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) 
 
   const fetchChartData = async () => {
     try {
+      if (USE_EMBEDDED_DATA) {
+        setLandUseData(EMBEDDED_DATA.landUseData);
+        setHeatDistData(EMBEDDED_DATA.heatDistData);
+        return;
+      }
+
       const [landUseRes, heatDistRes] = await Promise.all([
         axios.get(`${API}/land-use-distribution`),
         axios.get(`${API}/heat-distribution`)
       ]);
       
-      // Transform land use data for pie chart
       const landUse = Object.entries(landUseRes.data).map(([name, value]) => ({
         name,
         value
@@ -35,7 +40,9 @@ const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) 
       setLandUseData(landUse);
       setHeatDistData(heatDistRes.data);
     } catch (error) {
-      console.error('Error fetching chart data:', error);
+      console.warn('Using embedded chart data');
+      setLandUseData(EMBEDDED_DATA.landUseData);
+      setHeatDistData(EMBEDDED_DATA.heatDistData);
     }
   };
 
