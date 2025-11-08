@@ -126,3 +126,20 @@ button:active:not(:disabled) {
 .recharts-legend-item-text {
   color: #e2e8f0 !important;
 }
+
+/* Hide Emergent watermark */
+#emergent-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+a[href*="emergent"] {
+  display: none !important;
+}
+
+/* Hide any watermark or badge elements */
+[class*="badge"],
+[id*="badge"] {
+  display: none !important;
+}
