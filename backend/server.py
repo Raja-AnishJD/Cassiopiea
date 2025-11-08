@@ -5,6 +5,7 @@ from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
+import json
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
@@ -15,14 +16,33 @@ from geotiff_processor import GeoTIFFProcessor
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# Check if we should use static data
+USE_STATIC_DATA = os.environ.get('USE_STATIC_DATA', 'false').lower() == 'true'
+STATIC_DATA_DIR = Path('/app/data/static')
+
+# MongoDB connection (optional if using static data)
+try:
+    mongo_url = os.environ['MONGO_URL']
+    client = AsyncIOMotorClient(mongo_url)
+    db = client[os.environ['DB_NAME']]
+    MONGODB_AVAILABLE = True
+except Exception as e:
+    logging.warning(f"MongoDB not available: {e}. Using static data mode.")
+    MONGODB_AVAILABLE = False
+    db = None
 
 processor = GeoTIFFProcessor()
 
 app = FastAPI(title="Urban Heat & Greenness Dashboard API")
 api_router = APIRouter(prefix="/api")
+
+def load_static_json(filename):
+    """Load data from static JSON files"""
+    filepath = STATIC_DATA_DIR / filename
+    if filepath.exists():
+        with open(filepath, 'r') as f:
+            return json.load(f)
+    return None
 
 class StatusCheck(BaseModel):
     model_config = ConfigDict(extra="ignore")
