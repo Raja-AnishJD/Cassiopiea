@@ -98,7 +98,7 @@ const MapClickPopup = ({ position, data }) => {
             </h3>
           </div>
           <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: '#64748b' }}>
-            {getHealthAdvice(duhi)}
+            {getHealthAdvice(duhi, location_type)}
           </p>
         </div>
 
