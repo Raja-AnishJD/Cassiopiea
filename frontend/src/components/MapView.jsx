@@ -56,10 +56,16 @@ const MapView = () => {
 
   const fetchHotspots = async () => {
     try {
+      if (USE_EMBEDDED_DATA) {
+        setHotspots(EMBEDDED_DATA.hotspots);
+        return;
+      }
+      
       const res = await axios.get(`${API}/geojson/hotspots`);
       setHotspots(res.data);
     } catch (error) {
-      console.error('Error fetching hotspots:', error);
+      console.warn('Using embedded hotspots data');
+      setHotspots(EMBEDDED_DATA.hotspots);
     }
   };
 
@@ -68,7 +74,16 @@ const MapView = () => {
     const lng = latlng.lng;
     
     try {
-      // Fetch accurate location-based data from backend
+      if (USE_EMBEDDED_DATA) {
+        // Use embedded location calculator
+        const data = EMBEDDED_DATA.getLocationData(lat, lng, selectedYear);
+        setClickedLocation([lat, lng]);
+        setClickedData(data);
+        toast.success('Click the marker to see detailed information!');
+        return;
+      }
+
+      // Try API
       const res = await axios.post(`${API}/location-data`, {
         lat,
         lng,
@@ -79,8 +94,12 @@ const MapView = () => {
       setClickedData(res.data);
       toast.success('Click the marker to see detailed information!');
     } catch (error) {
-      console.error('Error fetching location data:', error);
-      toast.error('Failed to fetch location data');
+      console.warn('Using embedded location data');
+      // Fallback to embedded calculator
+      const data = EMBEDDED_DATA.getLocationData(lat, lng, selectedYear);
+      setClickedLocation([lat, lng]);
+      setClickedData(data);
+      toast.success('Click the marker to see detailed information!');
     }
   };
 
