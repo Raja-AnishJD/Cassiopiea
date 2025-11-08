@@ -36,6 +36,7 @@ const MapView = () => {
   const [hotspots, setHotspots] = useState(null);
   const [clickedLocation, setClickedLocation] = useState(null);
   const [clickedData, setClickedData] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(2025);
 
   useEffect(() => {
     fetchLayerPreview();
