@@ -62,18 +62,10 @@ class GeoTIFFProcessor:
             ndvi_data = self.load_tiff_as_array(self.ndvi_path)
             duhi_data = self.load_tiff_as_array(self.duhi_path)
             
-            # Handle multi-band or single band
-            if len(lst_data.shape) > 2:
-                lst_data = lst_data[:, :, 0]
-            if len(ndvi_data.shape) > 2:
-                ndvi_data = ndvi_data[:, :, 0]
-            if len(duhi_data.shape) > 2:
-                duhi_data = duhi_data[:, :, 0]
-            
-            # Normalize to expected ranges
-            lst_data = lst_data.astype(float) / 100.0  # Assuming stored as int * 100
-            ndvi_data = (ndvi_data.astype(float) / 255.0) * 2 - 1  # -1 to 1
-            duhi_data = duhi_data.astype(float) / 100.0
+            # Data is already in correct format from synthetic generation
+            lst_data = lst_data.astype(float)
+            ndvi_data = ndvi_data.astype(float)
+            duhi_data = duhi_data.astype(float)
             
             # Filter valid data
             valid_mask = (lst_data > -50) & (lst_data < 100) & (ndvi_data >= -1) & (ndvi_data <= 1)
