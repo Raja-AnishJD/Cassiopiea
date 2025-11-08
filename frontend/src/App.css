@@ -1,34 +1,128 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0b1020;
+  color: #e2e8f0;
+  overflow-x: hidden;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.App {
+  min-height: 100vh;
+  background: #0b1020;
 }
 
-.App-link {
-    color: #61dafb;
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(76, 201, 240, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(76, 201, 240, 0.5);
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: #0f1729;
+  font-family: 'Inter', sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(15, 23, 41, 0.95);
+  color: #e2e8f0;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(76, 201, 240, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.leaflet-popup-tip {
+  background: rgba(15, 23, 41, 0.95);
+}
+
+/* Map controls styling */
+.leaflet-control-zoom a,
+.leaflet-control-layers-toggle {
+  background: rgba(15, 23, 41, 0.9) !important;
+  border: 1px solid rgba(76, 201, 240, 0.2) !important;
+  color: #4cc9f0 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: rgba(76, 201, 240, 0.1) !important;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Gradient backgrounds */
+.gradient-ocean {
+  background: linear-gradient(135deg, rgba(76, 201, 240, 0.1) 0%, rgba(56, 189, 248, 0.05) 100%);
+}
+
+.gradient-heat {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(251, 146, 60, 0.05) 100%);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(15, 23, 41, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(76, 201, 240, 0.1);
+}
+
+/* Custom button hover effects */
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Recharts customization */
+.recharts-text {
+  fill: #94a3b8 !important;
+  font-size: 12px;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: #64748b !important;
+}
+
+.recharts-legend-item-text {
+  color: #e2e8f0 !important;
 }
