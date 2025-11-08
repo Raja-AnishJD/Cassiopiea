@@ -119,33 +119,33 @@ async def get_insights():
     """Get auto-generated insights based on data"""
     insights = [
         {
-            "category": "WHAT",
-            "title": "Urban Heat Crisis",
-            "text": "~42% of Peel exceeds +4°C relative to rural baseline, with industrial belts showing persistent hotspots above 5°C.",
+            "category": "THE PROBLEM",
+            "title": "Almost Half of Peel is Dangerously Hot",
+            "text": "42% of our region is over 4°C hotter than nearby countryside. That's like adding 10 extra scorching summer days per year. Industrial areas and parking lots are the worst offenders.",
             "icon": "thermometer"
         },
         {
-            "category": "WHY",
-            "title": "Vegetation-Temperature Link",
-            "text": "Vegetation and surface temperature are inversely correlated (r ≈ -0.78). Tree loss and impervious surfaces drive heat gains.",
+            "category": "WHY IT HAPPENS",
+            "title": "We Cut Down Trees, Heat Goes Up",
+            "text": "Simple math: Less green = More heat. When we replace trees and grass with concrete and asphalt, we create heat traps. These surfaces absorb sunlight all day and radiate heat all night.",
             "icon": "activity"
         },
         {
-            "category": "WHERE",
-            "title": "Cooling Corridors",
-            "text": "Cooling strongest in Claireville and conservation corridors. Target industrial zones and commercial districts for intervention.",
+            "category": "WHERE TO ACT",
+            "title": "Cool Zones Show Us What Works",
+            "text": "Claireville Conservation and forested areas stay 3-5°C cooler than downtown. Copy their recipe: more trees, green spaces, and water features. Target industrial zones and commercial districts first.",
             "icon": "map-pin"
         },
         {
-            "category": "HOW",
-            "title": "Mitigation Impact",
-            "text": "Increasing NDVI by 0.1 reduces LST by ~1.5°C. Cool roofs, permeable pavements, and canopy expansion are proven solutions.",
+            "category": "THE SOLUTION",
+            "title": "Small Changes, Big Impact",
+            "text": "Plant trees to add just 10% more greenery → Cool temps by 1.5°C. Paint roofs white → Reduce building heat by 30%. These aren't expensive - tree planting costs less than treating heat-related illness.",
             "icon": "trending-down"
         },
         {
-            "category": "SO WHAT",
-            "title": "Action Imperative",
-            "text": "Peel warming at 3.8°C/year demands immediate cooling measures. Prioritize vulnerable neighborhoods with targeted investments.",
+            "category": "WHY ACT NOW",
+            "title": "It's Getting Worse Fast",
+            "text": "Peel is heating up 3.8°C every year - fastest in the Greater Toronto Area. If we don't act now, heat waves will become the norm, not the exception. This affects everyone: kids, elderly, your energy bills.",
             "icon": "alert-circle"
         }
     ]
