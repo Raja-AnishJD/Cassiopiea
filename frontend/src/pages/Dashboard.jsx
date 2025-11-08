@@ -45,21 +45,44 @@ const Dashboard = () => {
     try {
       setLoading(true);
       
-      const [metricsRes, timeseriesRes, regionalRes, insightsRes] = await Promise.all([
-        axios.get(`${API}/metrics?region=Peel (All)`),
-        axios.get(`${API}/timeseries`),
-        axios.get(`${API}/regional-breakdown`),
-        axios.get(`${API}/insights`)
-      ]);
+      // Try embedded data first (works offline!)
+      if (USE_EMBEDDED_DATA) {
+        console.log('📦 Using embedded data (offline mode)');
+        setMetrics(EMBEDDED_DATA.metrics);
+        setTimeseriesData(EMBEDDED_DATA.timeseries);
+        setRegionalData(EMBEDDED_DATA.regionalData);
+        setInsights(EMBEDDED_DATA.insights);
+        toast.success('Dashboard loaded (offline mode)');
+        setLoading(false);
+        return;
+      }
 
-      setMetrics(metricsRes.data);
-      setTimeseriesData(timeseriesRes.data);
-      setRegionalData(regionalRes.data);
-      setInsights(insightsRes.data);
-      
-      toast.success('Dashboard loaded successfully');
+      // Try API with fallback to embedded data
+      try {
+        const [metricsRes, timeseriesRes, regionalRes, insightsRes] = await Promise.all([
+          axios.get(`${API}/metrics?region=Peel (All)`),
+          axios.get(`${API}/timeseries`),
+          axios.get(`${API}/regional-breakdown`),
+          axios.get(`${API}/insights`)
+        ]);
+
+        setMetrics(metricsRes.data);
+        setTimeseriesData(timeseriesRes.data);
+        setRegionalData(regionalRes.data);
+        setInsights(insightsRes.data);
+        
+        toast.success('Dashboard data loaded successfully');
+      } catch (apiError) {
+        console.warn('API failed, using embedded data:', apiError.message);
+        // Fallback to embedded data if API fails
+        setMetrics(EMBEDDED_DATA.metrics);
+        setTimeseriesData(EMBEDDED_DATA.timeseries);
+        setRegionalData(EMBEDDED_DATA.regionalData);
+        setInsights(EMBEDDED_DATA.insights);
+        toast.info('Using offline data (API unavailable)');
+      }
     } catch (error) {
-      console.error('Error fetching dashboard data:', error);
+      console.error('Error loading dashboard:', error);
       toast.error('Failed to load dashboard data');
     } finally {
       setLoading(false);
