@@ -15,24 +15,17 @@ from geotiff_processor import GeoTIFFProcessor
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Initialize GeoTIFF processor
 processor = GeoTIFFProcessor()
 
-# Create the main app
 app = FastAPI(title="Urban Heat & Greenness Dashboard API")
-
-# Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
-# Define Models
 class StatusCheck(BaseModel):
     model_config = ConfigDict(extra="ignore")
-    
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -55,7 +48,11 @@ class TimeseriesResponse(BaseModel):
     ndvi: List[float]
     duhi: List[float]
 
-# Dashboard API Routes
+class LocationDataRequest(BaseModel):
+    lat: float
+    lng: float
+    year: Optional[int] = 2025
+
 @api_router.get("/")
 async def root():
     return {"message": "Urban Heat & Greenness Dashboard API", "version": "1.0.0"}
@@ -80,6 +77,16 @@ async def get_timeseries():
         logging.error(f"Error getting timeseries: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@api_router.post("/location-data")
+async def get_location_data(request: LocationDataRequest):
+    """Get accurate data for a specific lat/lng location"""
+    try:
+        data = processor.get_location_data(request.lat, request.lng, request.year)
+        return data
+    except Exception as e:
+        logging.error(f"Error getting location data: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @api_router.get("/layer-preview/{layer_type}")
 async def get_layer_preview(layer_type: str):
     """Get base64 encoded map layer preview"""
@@ -98,7 +105,7 @@ async def get_layer_preview(layer_type: str):
 
 @api_router.get("/geojson/hotspots")
 async def get_hotspots():
-    """Get hotspot locations as GeoJSON"""
+    """Get hotspot locations as GeoJSON with heat sources"""
     try:
         return processor.get_hotspots()
     except Exception as e:
@@ -112,6 +119,24 @@ async def get_regional_breakdown():
         return processor.get_regional_breakdown()
     except Exception as e:
         logging.error(f"Error getting regional breakdown: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/land-use-distribution")
+async def get_land_use_distribution():
+    """Get land use distribution for pie chart"""
+    try:
+        return processor.get_land_use_distribution()
+    except Exception as e:
+        logging.error(f"Error getting land use distribution: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/heat-distribution")
+async def get_heat_distribution():
+    """Get heat level distribution for bar chart"""
+    try:
+        return processor.get_heat_distribution()
+    except Exception as e:
+        logging.error(f"Error getting heat distribution: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @api_router.get("/insights")
@@ -169,7 +194,6 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     return status_checks
 
-# Include the router in the main app
 app.include_router(api_router)
 
 app.add_middleware(
@@ -180,7 +204,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
