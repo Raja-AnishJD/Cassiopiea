@@ -5,9 +5,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { AlertTriangle, TrendingUp, Leaf, Thermometer, Target, ChevronRight, Info } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
+import { EMBEDDED_DATA } from '../data/embeddedData';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+const USE_EMBEDDED_DATA = !BACKEND_URL || BACKEND_URL === 'EMBEDDED';
 
 const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) => {
   const [yearFilter, setYearFilter] = useState([2018, 2025]);
