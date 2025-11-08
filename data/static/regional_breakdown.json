@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Brampton",
+    "mean_ndvi": 0.32,
+    "mean_lst": 33.2,
+    "duhi_trend": 3.9,
+    "correlation": -0.76
+  },
+  {
+    "name": "Mississauga",
+    "mean_ndvi": 0.29,
+    "mean_lst": 34.1,
+    "duhi_trend": 3.7,
+    "correlation": -0.79
+  },
+  {
+    "name": "Caledon",
+    "mean_ndvi": 0.48,
+    "mean_lst": 28.5,
+    "duhi_trend": 2.8,
+    "correlation": -0.81
+  },
+  {
+    "name": "Peel (All)",
+    "mean_ndvi": 0.35,
+    "mean_lst": 32.5,
+    "duhi_trend": 3.8,
+    "correlation": -0.78
+  }
+]

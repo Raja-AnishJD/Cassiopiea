@@ -1,0 +1,22 @@
+[
+  {
+    "range": "Safe (0-2°C)",
+    "percentage": 28,
+    "color": "#10b981"
+  },
+  {
+    "range": "Moderate (2-4°C)",
+    "percentage": 30,
+    "color": "#f59e0b"
+  },
+  {
+    "range": "High (4-6°C)",
+    "percentage": 25,
+    "color": "#f97316"
+  },
+  {
+    "range": "Extreme (>6°C)",
+    "percentage": 17,
+    "color": "#ef4444"
+  }
+]

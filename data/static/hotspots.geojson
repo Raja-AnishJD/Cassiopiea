@@ -1,0 +1,70 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-79.6951, 43.6847]
+      },
+      "properties": {
+        "name": "Industrial Belt (Manufacturing)",
+        "duhi": 6.8,
+        "type": "hotspot",
+        "source": "Factories, warehouses, large paved areas"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-79.6200, 43.7525]
+      },
+      "properties": {
+        "name": "Highway 427 Industrial Zone",
+        "duhi": 7.2,
+        "type": "hotspot",
+        "source": "Industrial parks, logistics centers, minimal vegetation"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-79.7800, 43.7000]
+      },
+      "properties": {
+        "name": "Commercial District (Shopping Centers)",
+        "duhi": 5.8,
+        "type": "hotspot",
+        "source": "Large parking lots, shopping malls, limited trees"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-79.8312, 43.7525]
+      },
+      "properties": {
+        "name": "Claireville Conservation Area",
+        "duhi": 1.2,
+        "type": "coolspot",
+        "source": "Dense forest, wetlands, natural cooling"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-79.8500, 43.6700]
+      },
+      "properties": {
+        "name": "Credit Valley Parks",
+        "duhi": 1.5,
+        "type": "coolspot",
+        "source": "River valley, mature trees, green corridors"
+      }
+    }
+  ]
+}
