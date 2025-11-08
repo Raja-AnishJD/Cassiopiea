@@ -20,9 +20,24 @@ const Sidebar = ({
 }) => {
   const regions = ['Brampton', 'Mississauga', 'Caledon', 'Peel (All)'];
   const layers = [
-    { value: 'duhi', label: 'ΔUHI (°C)', description: 'Urban-Rural Heat Difference' },
-    { value: 'ndvi', label: 'NDVI', description: 'Vegetation Greenness' },
-    { value: 'lst', label: 'LST (°C)', description: 'Surface Temperature' }
+    { 
+      value: 'duhi', 
+      label: 'ΔUHI (°C)', 
+      description: 'How much hotter than countryside',
+      help: 'Shows dangerous heat zones. Red = very hot, Blue = cooler'
+    },
+    { 
+      value: 'ndvi', 
+      label: 'NDVI (Greenness)', 
+      description: 'Tree & vegetation cover',
+      help: 'Green = lots of trees (cooler), Red = no vegetation (hotter)'
+    },
+    { 
+      value: 'lst', 
+      label: 'LST (°C)', 
+      description: 'Ground surface temperature',
+      help: 'Actual surface heat from satellites (not air temperature)'
+    }
   ];
 
   return (
@@ -30,9 +45,19 @@ const Sidebar = ({
       className="w-80 border-r border-cyan-500/20 overflow-y-auto p-6 space-y-6"
       style={{ background: 'rgba(15, 23, 41, 0.7)', backdropFilter: 'blur(16px)' }}
     >
+      {/* Instruction Card */}
+      <div className="bg-gradient-to-r from-cyan-500/10 to-blue-600/10 rounded-lg p-4 border border-cyan-500/20">
+        <p className="text-sm text-cyan-100 leading-relaxed">
+          <strong className="text-cyan-400">👈 Use these controls</strong> to explore heat patterns, then <strong>click the map</strong> to see data at any location.
+        </p>
+      </div>
+
       {/* Region Selector */}
       <div className="space-y-3">
-        <Label className="text-sm font-semibold text-slate-200">Region</Label>
+        <div>
+          <Label className="text-sm font-semibold text-slate-200">Choose Your Area</Label>
+          <p className="text-xs text-slate-400 mt-1">Select which part of Peel Region to analyze</p>
+        </div>
         <Select value={selectedRegion} onValueChange={setSelectedRegion}>
           <SelectTrigger 
             data-testid="region-selector"
@@ -52,7 +77,10 @@ const Sidebar = ({
 
       {/* Layer Selector */}
       <div className="space-y-3">
-        <Label className="text-sm font-semibold text-slate-200">Data Layer</Label>
+        <div>
+          <Label className="text-sm font-semibold text-slate-200">What to Show on Map</Label>
+          <p className="text-xs text-slate-400 mt-1">Each layer reveals different heat patterns</p>
+        </div>
         <RadioGroup value={selectedLayer} onValueChange={setSelectedLayer}>
           {layers.map(layer => (
             <div key={layer.value} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-cyan-500/5 transition-colors">
@@ -70,6 +98,7 @@ const Sidebar = ({
                   {layer.label}
                 </Label>
                 <p className="text-xs text-slate-400 mt-0.5">{layer.description}</p>
+                <p className="text-[10px] text-cyan-400/70 mt-1 italic">{layer.help}</p>
               </div>
             </div>
           ))}
