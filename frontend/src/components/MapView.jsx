@@ -160,11 +160,11 @@ const MapView = () => {
           </Card>
 
           {/* Year Selector */}
-          <Card className=\"glass border-cyan-500/20\">
-            <div className=\"p-4 space-y-3\">
-              <div className=\"flex justify-between\">
-                <Label className=\"text-sm font-semibold text-white\">Time Travel</Label>
-                <span className=\"text-xs text-cyan-400 font-mono\">{selectedYear}</span>
+          <Card className="glass border-cyan-500/20">
+            <div className="p-4 space-y-3">
+              <div className="flex justify-between">
+                <Label className="text-sm font-semibold text-white">Time Travel</Label>
+                <span className="text-xs text-cyan-400 font-mono">{selectedYear}</span>
               </div>
               <Slider
                 value={[selectedYear]}
@@ -173,7 +173,7 @@ const MapView = () => {
                 max={2025}
                 step={1}
               />
-              <p className=\"text-xs text-slate-400\">See how heat changed over years. Click map after changing year.</p>
+              <p className="text-xs text-slate-400">See how heat changed over years. Click map after changing year.</p>
             </div>
           </Card>
 
