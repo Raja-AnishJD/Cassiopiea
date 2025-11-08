@@ -75,7 +75,13 @@ class LocationDataRequest(BaseModel):
 
 @api_router.get("/")
 async def root():
-    return {"message": "Urban Heat & Greenness Dashboard API", "version": "1.0.0"}
+    mode = "Static Data Mode" if USE_STATIC_DATA or not MONGODB_AVAILABLE else "Database Mode"
+    return {
+        "message": "Urban Heat & Greenness Dashboard API", 
+        "version": "1.0.0",
+        "mode": mode,
+        "mongodb_available": MONGODB_AVAILABLE
+    }
 
 @api_router.get("/metrics", response_model=MetricsResponse)
 async def get_metrics(region: str = "Peel"):
