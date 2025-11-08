@@ -52,7 +52,8 @@ class GeoTIFFProcessor:
             
             return data
         except Exception as e:
-            logger.error(f\"Error loading {filepath}: {e}\")\n            return None
+            logger.error(f"Error loading {filepath}: {e}")
+            return None
     
     def calculate_regional_metrics(self, region="Peel"):
         """Calculate key metrics for dashboard"""
