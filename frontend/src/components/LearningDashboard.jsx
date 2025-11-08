@@ -418,12 +418,29 @@ const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) 
               <CardContent>
                 <div className="space-y-4">
                   {timeframe.items.map((item, itemIdx) => (
-                    <div key={itemIdx} className="bg-slate-800/30 rounded-lg p-3">
+                    <div key={itemIdx} className="bg-slate-800/30 rounded-lg p-3 hover:bg-slate-800/50 transition-all">
                       <div className="flex items-start gap-2">
                         <ChevronRight className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                        <div>
+                        <div className="flex-1">
                           <p className="text-sm font-semibold text-white mb-1">{item.action}</p>
-                          <p className="text-xs text-slate-400">{item.impact}</p>
+                          <p className="text-xs text-slate-400 mb-2">{item.impact}</p>
+                          {item.learnMore && (
+                            <button
+                              onClick={() => {
+                                // Scroll to Knowledge Hub and highlight section
+                                const knowledgeTab = document.querySelector('[data-testid="tab-knowledge"]');
+                                if (knowledgeTab) {
+                                  knowledgeTab.click();
+                                  setTimeout(() => {
+                                    window.scrollTo({ top: 200, behavior: 'smooth' });
+                                  }, 300);
+                                }
+                              }}
+                              className="text-xs text-cyan-400 hover:text-cyan-300 underline flex items-center gap-1"
+                            >
+                              📚 Learn more about {item.learnMore}
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>
