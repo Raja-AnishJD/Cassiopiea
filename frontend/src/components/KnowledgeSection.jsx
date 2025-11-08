@@ -63,9 +63,40 @@ const KnowledgeSection = () => {
       ]
     },
     {
+      icon: '🏗️',
+      title: 'Cooling Solutions Explained',
+      color: 'from-purple-500 to-pink-500',
+      content: [
+        {
+          q: 'What are Cool Roofs and how do they work?',
+          a: 'Cool roofs are painted white or use reflective materials that bounce sunlight away instead of absorbing it. Regular dark roofs can reach 80°C, while white roofs stay around 50°C. This reduces building heat by 30% and lowers AC costs by 20-40%. Cost: $3-8 per square foot.'
+        },
+        {
+          q: 'What is Cool Pavement?',
+          a: 'Cool pavement uses special light-colored materials or coatings that reflect more sunlight than traditional dark asphalt. Regular pavement: 60°C on hot days. Cool pavement: 45-50°C (10-15°C cooler!). Benefits: Lower air temperature, less heat absorbed by buildings nearby, safer for pedestrians. Cities like Los Angeles have tested this successfully.'
+        },
+        {
+          q: 'What are Green Roofs?',
+          a: 'Green roofs are covered with living plants and soil. They cool through shade and evapotranspiration (plants releasing water). Benefits: Reduce roof temperature by 30-40°C, absorb rainwater, improve air quality, provide habitat for birds/insects. Cost: $15-25 per square foot, but saves energy long-term.'
+        },
+        {
+          q: 'What are Permeable Pavements?',
+          a: 'Instead of solid concrete, permeable pavements have tiny holes that let rainwater soak through into the ground below. Benefits: Reduces flooding, keeps water cooler (reducing runoff temperature), allows tree roots to breathe. Used for parking lots, driveways, and sidewalks.'
+        },
+        {
+          q: 'What are Urban Green Corridors?',
+          a: 'Green corridors are connected strips of trees, parks, and green spaces that create "cooling highways" through cities. Cool air flows through these corridors, spreading relief to nearby neighborhoods. Example: River valleys, linear parks along old railway lines, tree-lined streets that connect parks.'
+        },
+        {
+          q: 'What are Bioswales and Rain Gardens?',
+          a: 'Shallow landscaped channels filled with plants that collect and filter rainwater. Benefits: Natural cooling through evaporation, reduce flooding, filter pollutants, create beautiful green spaces. Perfect for street medians and parking lot borders. Cost-effective alternative to traditional drainage.'
+        }
+      ]
+    },
+    {
       icon: '🏙️',
       title: 'Heat & City Planning',
-      color: 'from-purple-500 to-pink-500',
+      color: 'from-amber-500 to-yellow-500',
       content: [
         {
           q: 'Why are some neighborhoods hotter than others?',
@@ -84,7 +115,7 @@ const KnowledgeSection = () => {
     {
       icon: '💡',
       title: 'Take Action in Your Community',
-      color: 'from-amber-500 to-yellow-500',
+      color: 'from-cyan-500 to-blue-500',
       content: [
         {
           q: 'What can I do as an individual?',
