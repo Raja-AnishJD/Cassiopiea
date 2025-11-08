@@ -11,6 +11,31 @@ const API = `${BACKEND_URL}/api`;
 
 const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) => {
   const [yearFilter, setYearFilter] = useState([2018, 2025]);
+  const [landUseData, setLandUseData] = useState([]);
+  const [heatDistData, setHeatDistData] = useState([]);
+
+  useEffect(() => {
+    fetchChartData();
+  }, []);
+
+  const fetchChartData = async () => {
+    try {
+      const [landUseRes, heatDistRes] = await Promise.all([
+        axios.get(`${API}/land-use-distribution`),
+        axios.get(`${API}/heat-distribution`)
+      ]);
+      
+      // Transform land use data for pie chart
+      const landUse = Object.entries(landUseRes.data).map(([name, value]) => ({
+        name,
+        value
+      }));
+      setLandUseData(landUse);
+      setHeatDistData(heatDistRes.data);
+    } catch (error) {
+      console.error('Error fetching chart data:', error);
+    }
+  };
 
   // Filter timeseries data based on year range
   const filteredTrendData = timeseriesData ? 
