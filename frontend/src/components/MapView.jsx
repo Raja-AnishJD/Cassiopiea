@@ -10,9 +10,11 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Slider } from '@/components/ui/slider';
 import MapClickPopup from './MapClickPopup';
 import { Info } from 'lucide-react';
+import { EMBEDDED_DATA } from '../data/embeddedData';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+const USE_EMBEDDED_DATA = !BACKEND_URL || BACKEND_URL === 'EMBEDDED';
 
 const PEEL_CENTER = [43.7315, -79.7624];
 const PEEL_BOUNDS = [
