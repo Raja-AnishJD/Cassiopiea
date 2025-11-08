@@ -60,24 +60,25 @@ const MapView = () => {
     }
   };
 
-  const handleMapClick = (latlng) => {
+  const handleMapClick = async (latlng) => {
     const lat = latlng.lat;
     const lng = latlng.lng;
     
-    const distFromCenter = Math.sqrt(
-      Math.pow(lat - PEEL_CENTER[0], 2) + 
-      Math.pow(lng - PEEL_CENTER[1], 2)
-    );
-    
-    const mockData = {
-      duhi: Math.max(0.5, Math.min(8, 3 + distFromCenter * 20 + (Math.random() - 0.5) * 2)),
-      ndvi: Math.max(0.1, Math.min(0.8, 0.4 - distFromCenter * 2 + (Math.random() - 0.5) * 0.2)),
-      lst: Math.max(20, Math.min(45, 30 + distFromCenter * 30 + (Math.random() - 0.5) * 3))
-    };
-
-    setClickedLocation([latlng.lat, latlng.lng]);
-    setClickedData(mockData);
-    toast.success('Click the marker to see detailed information!');
+    try {
+      // Fetch accurate location-based data from backend
+      const res = await axios.post(`${API}/location-data`, {
+        lat,
+        lng,
+        year: selectedYear
+      });
+      
+      setClickedLocation([lat, lng]);
+      setClickedData(res.data);
+      toast.success('Click the marker to see detailed information!');
+    } catch (error) {
+      console.error('Error fetching location data:', error);
+      toast.error('Failed to fetch location data');
+    }
   };
 
   const layers = [
