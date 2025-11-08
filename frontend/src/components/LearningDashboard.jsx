@@ -185,6 +185,88 @@ const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) 
 
         {/* Charts */}
         <div className="grid md:grid-cols-2 gap-6">
+          {/* Land Use Pie Chart */}
+          <Card className="glass border-cyan-500/20">
+            <CardHeader>
+              <CardTitle className="text-base text-white flex items-center gap-2">
+                <Target className="w-5 h-5 text-purple-400" />
+                Where Is The Heat Coming From?
+              </CardTitle>
+              <p className="text-xs text-slate-400">Land use breakdown - more industrial/commercial = more heat</p>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie
+                    data={landUseData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {landUseData.map((entry, index) => {
+                      const colors = ['#ef4444', '#f97316', '#3b82f6', '#10b981', '#6366f1', '#8b5cf6'];
+                      return <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />;
+                    })}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{
+                      background: 'rgba(15, 23, 41, 0.95)',
+                      border: '1px solid rgba(76, 201, 240, 0.2)',
+                      borderRadius: '8px',
+                      fontSize: '12px'
+                    }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+              <p className="text-xs text-center text-slate-400 mt-2">
+                🏭 <strong className="text-red-400">33%</strong> Industrial+Commercial zones create most heat
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Heat Distribution Bar Chart */}
+          <Card className="glass border-cyan-500/20">
+            <CardHeader>
+              <CardTitle className="text-base text-white flex items-center gap-2">
+                <Thermometer className="w-5 h-5 text-orange-400" />
+                How Much Area Is Dangerously Hot?
+              </CardTitle>
+              <p className="text-xs text-slate-400">Heat level distribution across Peel Region</p>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={heatDistData} layout="vertical">
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.1)" />
+                  <XAxis type="number" stroke="#64748b" style={{ fontSize: '12px' }} />
+                  <YAxis dataKey="range" type="category" stroke="#64748b" style={{ fontSize: '11px' }} width={120} />
+                  <Tooltip
+                    contentStyle={{
+                      background: 'rgba(15, 23, 41, 0.95)',
+                      border: '1px solid rgba(76, 201, 240, 0.2)',
+                      borderRadius: '8px',
+                      fontSize: '12px'
+                    }}
+                  />
+                  <Bar dataKey="percentage" radius={[0, 8, 8, 0]}>
+                    {heatDistData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+              <p className="text-xs text-center text-slate-400 mt-2">
+                ⚠️ <strong className="text-red-400">42%</strong> of area is in High or Extreme heat zones
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Line Charts - Temperature & Vegetation Trends */}
+        <div className="grid md:grid-cols-2 gap-6 mt-6">
           <Card className="glass border-cyan-500/20">
             <CardHeader>
               <CardTitle className="text-base text-white flex items-center gap-2">
