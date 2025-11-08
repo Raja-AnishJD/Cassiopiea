@@ -61,6 +61,28 @@ const MapClickPopup = ({ position, data }) => {
   return (
     <Popup>
       <div style={{ minWidth: '300px', padding: '8px' }}>
+        {/* Location Type Badge */}
+        <div style={{
+          background: 'rgba(76, 201, 240, 0.1)',
+          border: '1px solid rgba(76, 201, 240, 0.3)',
+          borderRadius: '6px',
+          padding: '8px',
+          marginBottom: '12px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <span style={{ fontSize: '24px' }}>{getLocationIcon(location_type)}</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#4cc9f0' }}>
+              {getLocationLabel(location_type)}
+            </div>
+            <div style={{ fontSize: '10px', color: '#94a3b8', marginTop: '2px' }}>
+              {description}
+            </div>
+          </div>
+        </div>
+
         {/* Header with Risk Level */}
         <div style={{ 
           background: `linear-gradient(135deg, ${risk.color}22 0%, ${risk.color}11 100%)`,
