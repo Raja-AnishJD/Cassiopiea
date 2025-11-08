@@ -5,7 +5,7 @@ import { Thermometer, Leaf, TrendingUp, AlertTriangle } from 'lucide-react';
 const MapClickPopup = ({ position, data }) => {
   if (!data) return null;
 
-  const { duhi, ndvi, lst } = data;
+  const { duhi, ndvi, lst, location_type, description } = data;
 
   // Determine risk level
   const getRiskLevel = (duhi) => {
@@ -17,7 +17,8 @@ const MapClickPopup = ({ position, data }) => {
 
   const risk = getRiskLevel(duhi);
 
-  const getHealthAdvice = (duhi) => {
+  const getHealthAdvice = (duhi, locType) => {
+    if (locType === 'water') return 'Water surface - temperature data not applicable here.';
     if (duhi >= 5) return 'Stay indoors during peak hours. Seek AC if possible.';
     if (duhi >= 4) return 'Limit outdoor activity. Stay hydrated.';
     if (duhi >= 2) return 'Take breaks in shade. Drink plenty of water.';
@@ -33,9 +34,33 @@ const MapClickPopup = ({ position, data }) => {
 
   const vegStatus = getVegetationStatus(ndvi);
 
+  const getLocationIcon = (locType) => {
+    const icons = {
+      industrial: '🏭',
+      commercial: '🏢',
+      downtown: '🏙️',
+      residential: '🏘️',
+      park: '🌳',
+      water: '💧'
+    };
+    return icons[locType] || '📍';
+  };
+
+  const getLocationLabel = (locType) => {
+    const labels = {
+      industrial: 'Industrial Zone',
+      commercial: 'Commercial District',
+      downtown: 'Urban Core',
+      residential: 'Residential Area',
+      park: 'Park/Conservation',
+      water: 'Water Body'
+    };
+    return labels[locType] || 'Mixed Area';
+  };
+
   return (
     <Popup>
-      <div style={{ minWidth: '280px', padding: '8px' }}>
+      <div style={{ minWidth: '300px', padding: '8px' }}>
         {/* Header with Risk Level */}
         <div style={{ 
           background: `linear-gradient(135deg, ${risk.color}22 0%, ${risk.color}11 100%)`,
