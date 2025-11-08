@@ -142,6 +142,12 @@ async def get_hotspots():
 async def get_regional_breakdown():
     """Get metrics breakdown by region"""
     try:
+        # Try static data first if enabled
+        if USE_STATIC_DATA or not MONGODB_AVAILABLE:
+            static_data = load_static_json('regional_breakdown.json')
+            if static_data:
+                return static_data
+        
         return processor.get_regional_breakdown()
     except Exception as e:
         logging.error(f"Error getting regional breakdown: {e}")
@@ -151,6 +157,11 @@ async def get_regional_breakdown():
 async def get_land_use_distribution():
     """Get land use distribution for pie chart"""
     try:
+        if USE_STATIC_DATA or not MONGODB_AVAILABLE:
+            static_data = load_static_json('land_use.json')
+            if static_data:
+                return static_data
+        
         return processor.get_land_use_distribution()
     except Exception as e:
         logging.error(f"Error getting land use distribution: {e}")
@@ -160,6 +171,11 @@ async def get_land_use_distribution():
 async def get_heat_distribution():
     """Get heat level distribution for bar chart"""
     try:
+        if USE_STATIC_DATA or not MONGODB_AVAILABLE:
+            static_data = load_static_json('heat_distribution.json')
+            if static_data:
+                return static_data
+        
         return processor.get_heat_distribution()
     except Exception as e:
         logging.error(f"Error getting heat distribution: {e}")
