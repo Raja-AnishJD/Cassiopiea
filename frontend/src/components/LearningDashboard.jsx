@@ -55,9 +55,9 @@ const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) 
       icon: '🔴',
       color: 'from-red-500 to-orange-500',
       items: [
-        { action: 'Paint roofs white', impact: 'Reduces building heat by 30%' },
-        { action: 'Add shade at bus stops', impact: 'Protects vulnerable people' },
-        { action: 'Plant street trees', impact: 'Each tree cools 1-2°C' },
+        { action: 'Paint roofs white', impact: 'Reduces building heat by 30%', learnMore: 'Cool Roofs' },
+        { action: 'Add shade at bus stops', impact: 'Protects vulnerable people', learnMore: null },
+        { action: 'Plant street trees', impact: 'Each tree cools 1-2°C', learnMore: 'Trees' },
       ]
     },
     {
@@ -65,9 +65,9 @@ const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) 
       icon: '🟡',
       color: 'from-amber-500 to-yellow-500',
       items: [
-        { action: 'Use cool pavement', impact: 'Stays 10-15°C cooler' },
-        { action: 'Create green corridors', impact: 'Connects cool zones' },
-        { action: 'Install water features', impact: 'Evaporative cooling' },
+        { action: 'Use cool pavement', impact: 'Stays 10-15°C cooler', learnMore: 'Cool Pavement' },
+        { action: 'Create green corridors', impact: 'Connects cool zones', learnMore: 'Green Corridors' },
+        { action: 'Install water features', impact: 'Evaporative cooling', learnMore: 'Bioswales' },
       ]
     },
     {
@@ -75,9 +75,9 @@ const LearningDashboard = ({ metrics, timeseriesData, regionalData, insights }) 
       icon: '🟢',
       color: 'from-green-500 to-emerald-500',
       items: [
-        { action: 'Achieve 30% tree cover', impact: 'City-wide cooling' },
-        { action: 'Mandate green roofs', impact: 'New buildings must cool' },
-        { action: 'Build cooling parks', impact: 'Heat relief centers' },
+        { action: 'Achieve 30% tree cover', impact: 'City-wide cooling', learnMore: 'Trees' },
+        { action: 'Mandate green roofs', impact: 'New buildings must cool', learnMore: 'Green Roofs' },
+        { action: 'Build cooling parks', impact: 'Heat relief centers', learnMore: null },
       ]
     },
   ];
