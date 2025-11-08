@@ -9,9 +9,13 @@ import HelpButton from '../components/HelpButton';
 import MapView from '../components/MapView';
 import KnowledgeSection from '../components/KnowledgeSection';
 import LearningDashboard from '../components/LearningDashboard';
+import { EMBEDDED_DATA } from '../data/embeddedData';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// Flag to use embedded data (works offline!)
+const USE_EMBEDDED_DATA = !BACKEND_URL || BACKEND_URL === 'EMBEDDED';
 
 const Dashboard = () => {
   const [showWelcome, setShowWelcome] = useState(false);
